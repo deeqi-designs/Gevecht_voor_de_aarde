@@ -1,0 +1,902 @@
+/*ANIMATIE MET SPRITESHEET -> FORMULE VOOR EINDPUNT: -1 * (SPRITESHEET WIDTH - HELFT VAN 1 SPRITE) = EINDPUNT
+   PLAATSEN -> FORMULE VOOR ILLUSTRATOR COORDINATEN: X POSITIE - HELFT VAN SPRITE WIDTH = PRECIEZE PLEK (ZELFDE GELD VOOR Y-AS COORDINATEN!!
+   WIDTH VAN SPRITE MET SPRITESHEET -> WIDTH VAN 1 SPRITE (WIDTH VAN AFBEELDING / AANTAL STAPPEN IN SPRITESHEET) 
+   */
+html {
+  width: 1446px;
+  height: 1080px;
+}
+
+body {
+  zoom: 0.85; /*SCALED ALLES -> ONTHOUDEN VOOR SCENES*/
+}
+
+@font-face {
+  font-family: digitalFont;
+  src: url(fonts/digital_7.ttf);
+}
+
+@font-face {
+  font-family: simplyroundedFont;
+  src: url(fonts/simply_rounded.ttf);
+}
+
+/*STILLE OBJECTEN*/
+
+/*SCENE 1*/
+#title_text {
+  font-family: digitalFont;
+  font-size: 96px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-left: 210px;
+  margin-top: 100px;
+}
+
+#schermsize_text {
+  font-family: digitalFont;
+  font-size: 34px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-left: 370px;
+  margin-top: 860px;
+}
+
+#start_text {
+  font-family: digitalFont;
+  font-size: 60px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-left: 650px;
+  margin-top: 975px;
+}
+
+#start_text:hover {
+  color: red;
+}
+
+/*SCENE 2*/
+#lijn_1_text {
+  font-family: digitalFont;
+  font-size: 96px;
+  color: #00cbce;
+  position: absolute;
+  text-align: center;
+  margin-left: 630px;
+  margin-top: 630px;
+}
+
+#telefoontje {
+  background-image: url(sprites/objecten/telefoontje.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 112px;
+  height: 163px;
+  margin-left: 879px;
+  margin-top: 409px;
+}
+
+#subtitle_text {
+  font-family: simplyroundedFont;
+  font-size: 40px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-left: 400px;
+  margin-top: 850px;
+  width: 660px;
+  display: none;
+}
+
+/*SCENE 3*/
+#begrepen_knop {
+  font-family: digitalFont;
+  font-size: 48px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  background-color: #006837;
+  width: 357px;
+  height: 90px;
+  border-radius: 12px;
+  margin-top: 961px;
+  margin-left: 535.5px;
+}
+
+#begrepen_knop p {
+  margin-top: 22.5px;
+}
+
+#begrepen_knop:hover {
+  color: #006837;
+  background-color: white;
+  animation: begrepenAnimation 2s infinite ease-in-out;
+}
+
+/*SCENE 5*/
+#boventekst_eindbaas {
+  font-family: digitalFont;
+  font-size: 112px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-left: 290px;
+  margin-top: 100px;
+  animation: tekstMoveDownAnimation 5s ease-in-out forwards;
+}
+
+#ondertekst_eindbaas {
+  font-family: digitalFont;
+  opacity: 0%;
+  font-size: 96px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-left: 460px;
+  margin-top: 860px;
+  animation: tekstFlickerAnimation 0.5s forwards;
+  animation-delay: 1.5s;
+  animation-iteration-count: 4;
+}
+
+/*SCENE 6*/
+#felicitatie_tekst {
+  font-family: simplyroundedFont;
+  font-size: 112px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-left: 383.5px;
+  margin-top: 920px;
+}
+
+/*ACHTERGRONDEN*/
+
+#container_1 {
+  /*ACHTERGROND VOOR SCENE 1, 4 EN 5 (SPACE SCENES)*/
+  background-image: url(sprites/bg/space_bg.jpg);
+  background-repeat: no-repeat;
+  width: 1446px;
+  height: 1080px;
+}
+
+#sterren {
+  background-image: url(sprites/bg/sterren.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 1446px;
+  height: 1080px;
+}
+
+#container_2 {
+  /*ACHTERGROND VOOR SCENE 2 (CODEC SCENE)*/
+  background-image: url(sprites/bg/codec_bg.jpg);
+  background-repeat: no-repeat;
+  width: 1446px;
+  height: 1080px;
+}
+
+#container_3 {
+  /*ACHTERGROND VOOR SCENE 3 (INSTRUCTIE SCENE)*/
+  background-image: url(sprites/bg/instructie_bg.png);
+  background-repeat: no-repeat;
+  width: 1446px;
+  height: 1080px;
+}
+
+#container_4 {
+  /*ACHTERGROND VOOR SCENE 6 (FLAG SCENE)*/
+  background-image: url(sprites/bg/vlag_bg.jpg);
+  background-repeat: no-repeat;
+  width: 1446px;
+  height: 1080px;
+}
+
+#background_shooting {
+  background-image: url(sprites/bg/space_bg.jpg);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 1446px;
+  height: 1080px;
+}
+
+/*KARAKTERS*/
+
+/*SCENE 2*/
+#baas_hoofd {
+  background-image: url(sprites/karakters/baas_hoofd.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 290px;
+  height: 321px;
+  margin-left: 85px;
+  margin-top: 241px;
+  animation: baasHoofdAnimation 0.5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+#baas_lichaam {
+  background-image: url(sprites/karakters/baas_lichaam.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 215px;
+  height: 173px;
+  margin-left: 123px;
+  margin-top: 593px;
+}
+
+#baas_mond {
+  background-image: url(sprites/karakters/baas_mond.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 83px;
+  height: 26px;
+  margin-left: 187px;
+  margin-top: 510.25px;
+  animation: mouthAnimation 0.25s ease-in-out both infinite;
+  animation-play-state: paused;
+}
+
+#worm_hoofd_1 {
+  background-image: url(sprites/karakters/worm_hoofd.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 242px;
+  height: 320px;
+  margin-left: 1100.4px;
+  margin-top: 244px;
+  animation: baasHoofdAnimation 0.5s infinite ease-in-out;
+  animation-play-state: paused;
+}
+
+#worm_mond {
+  background-image: url(sprites/karakters/worm_mond.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 46.64px;
+  height: 23.32px;
+  margin-left: 1198px;
+  margin-top: 520.25px;
+  animation: mouthAnimation 0.25s ease-in-out both infinite;
+  animation-play-state: paused;
+}
+
+#worm_lichaam_1 {
+  background-image: url(sprites/karakters/worm_lichaam.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 186px;
+  height: 173px;
+  margin-left: 1128px;
+  margin-top: 593.5px;
+}
+
+/*SCENE 6*/
+#worm_lichaam_2 {
+  background-image: url(sprites/karakters/worm_lichaam_2.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 376px;
+  height: 810px;
+  margin-left: 520px;
+  margin-top: 270px;
+}
+
+/*GEANIMEERDE OBJECTEN*/
+/*SCENE 1*/
+#aarde {
+  background-image: url(sprites/objecten/aarde.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 543px;
+  height: 543px;
+  margin-left: 452px;
+  margin-top: 267px;
+  animation: turnEarth 45s linear both infinite;
+}
+
+.individuele_ster {
+  background-image: url(sprites/objecten/star_startscreen.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  animation: starAnimations infinite both ease-in-out;
+}
+
+#ster_1 {
+  margin-left: 70px;
+  margin-top: 60px;
+  animation-duration: 2s;
+}
+
+#ster_2 {
+  margin-left: 1290px;
+  margin-top: 450px;
+  animation-delay: 1.3s;
+  animation-duration: 2s;
+}
+
+#ster_3 {
+  margin-left: 1390px;
+  margin-top: 1000px;
+  animation-delay: 1.5s;
+  animation-duration: 3s;
+}
+
+#ster_4 {
+  margin-left: 100px;
+  margin-top: 850px;
+  animation-delay: 1.8s;
+  animation-duration: 2s;
+}
+
+#ster_5 {
+  margin-left: 1340px;
+  margin-top: 60px;
+  animation-delay: 1.9s;
+  animation-duration: 4s;
+}
+
+#ster_6 {
+  margin-left: 350px;
+  margin-top: 350px;
+  animation-delay: 1.1s;
+  animation-duration: 4s;
+}
+
+/*SCENE 2*/
+#graph_lijnen {
+  background-image: url(sprites/objecten/sprite_sheet_graph_lijnen.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  margin-left: 452px;
+  margin-top: 210px;
+  width: 531px;
+  height: 372px;
+  animation: graphAnimation 0.3s steps(6) infinite;
+  animation-play-state: running;
+  animation-delay: 0.5s;
+}
+
+/*SCENE 3*/
+#reload_instructie {
+  background-image: url(sprites/instructie/reload_instructie_spritesheet.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 236px;
+  height: 363px;
+  margin-left: 1026.5px;
+  margin-top: 398px;
+  animation: reloadAnimation 2s steps(2) infinite;
+}
+
+#schiet_instructie {
+  background-image: url(sprites/instructie/schiet_instructie_spritesheet.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 236px;
+  height: 363px;
+  margin-left: 165.5px;
+  margin-top: 398px;
+  animation: shootAnimation 1.2s steps(2) infinite;
+}
+
+#instructie_ufo {
+  background-image: url(sprites/instructie/instructie_ufo_spritesheet.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 301.5px;
+  height: 231px;
+  margin-left: 133.25px;
+  margin-top: 112.9px;
+  animation: instructieUfoAnimation 1.2s steps(2) infinite;
+}
+
+#help_schiet {
+  background-image: url(sprites/instructie/help_icon.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 170px;
+  height: 180px;
+  margin-left: 481px;
+  margin-top: 502px;
+  animation: helpAnimation 2s infinite ease-in-out;
+}
+
+#help_schiet:hover ~ #extra_uitleg_schiet {
+  animation: slideInAnimation 0.75s forwards ease-in-out;
+  display: block;
+}
+
+#help_schiet:hover {
+  animation: none;
+  filter: contrast(2);
+}
+
+#help_reload {
+  background-image: url(sprites/instructie/help_icon.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 170px;
+  height: 180px;
+  margin-left: 803px;
+  margin-top: 502px;
+  animation: helpAnimation 2s infinite ease-in-out;
+  animation-delay: 0.7s;
+}
+
+#help_reload:hover ~ #extra_uitleg_reload {
+  animation: slideInAnimation 0.75s forwards ease-in-out;
+  display: block;
+}
+
+#help_reload:hover {
+  animation: none;
+  filter: contrast(2);
+}
+
+#instructie_ammo_indicator {
+  background-image: url(sprites/instructie/ammo_indicator_spritesheet.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 238px;
+  height: 105px;
+  margin-left: 1048px;
+  margin-top: 180.4px;
+  animation: ammoIndicatorAnimation 5s steps(6) infinite;
+}
+
+#extra_uitleg_schiet {
+  font-family: simplyroundedFont;
+  font-size: 60px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  background-color: #3a9999;
+  width: 500px;
+  height: 700px;
+  border-radius: 30px;
+  margin-top: 100px;
+  margin-left: 825px;
+  display: none;
+}
+
+#extra_uitleg_reload {
+  font-family: simplyroundedFont;
+  font-size: 58px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  background-color: #3a9999;
+  width: 500px;
+  height: 700px;
+  border-radius: 30px;
+  margin-top: 100px;
+  margin-left: 155px;
+  display: none;
+}
+
+/*SCENE 4*/
+#HUD_ammo {
+  background-image: url(sprites/HUD/ammo_indicator_5.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 238px;
+  height: 105px;
+  margin-left: 1180px;
+  margin-top: 970px;
+}
+
+#ufo_1 {
+  background-image: url(sprites/objecten/ufo_facing_left.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 302px;
+  height: 230px;
+  margin-left: 967px;
+  margin-top: 147px;
+  animation: ufoMoveAnimation 1.5s infinite ease-in-out;
+}
+
+#ufo_2 {
+  background-image: url(sprites/objecten/ufo_facing_right.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 302px;
+  height: 230px;
+  margin-left: 183px;
+  margin-top: 270px;
+  animation: ufoMoveAnimation 1.5s infinite ease-in-out;
+  animation-delay: 0.25s;
+}
+
+#ufo_3 {
+  background-image: url(sprites/objecten/ufo_facing_right.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 302px;
+  height: 230px;
+  margin-left: 153px;
+  margin-top: 622px;
+  animation: ufoMoveAnimation 1.5s infinite ease-in-out;
+  animation-delay: 0.5s;
+}
+
+#ufo_4 {
+  background-image: url(sprites/objecten/ufo_facing_left.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 302px;
+  height: 230px;
+  margin-left: 970px;
+  margin-top: 750px;
+  animation: ufoMoveAnimation 1.5s infinite ease-in-out;
+  animation-delay: 0.75s;
+}
+
+/*SCENE 5*/
+
+#ufo_baas {
+  background-image: url(sprites/objecten/baas_ufo_0.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 953px;
+  height: 493px;
+  margin-left: 260px;
+  margin-top: 210px;
+  opacity: 0%;
+  animation: ufoBaasAppear 4s forwards 3s;
+  /* animation: ufoBaasMovement 3s infinite; */
+}
+
+#baas_ontploffing {
+  background-image: url(sprites/objecten/big_ufo_explosion_spritesheet.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 1008px;
+  height: 457px;
+  margin-left: 230px;
+  margin-top: 260px;
+  animation: baasOntploffingAnimation 1s steps(5) infinite;
+  display: none;
+}
+
+/*SCENE 6*/
+#vlag {
+  background-image: url(sprites/objecten/vlag.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 1380px;
+  height: 942px;
+  margin-left: 27.1px;
+  animation: vlagAnimation 2s forwards ease-in-out;
+  animation-duration: 4s;
+}
+
+#worm_hand {
+  background-image: url(sprites/karakters/worm_hand.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 106px;
+  height: 105px;
+  margin-left: 450px;
+  margin-top: 965px;
+  animation: wormHandMovement 1s forwards ease-in-out;
+  animation-delay: 2s;
+}
+
+#badge {
+  background-image: url(sprites/objecten/badge.png);
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 106px;
+  height: 138px;
+  margin-left: 723px;
+  margin-top: 840px;
+  animation: badgeAnimation 2s forwards ease-in-out;
+}
+
+#opnieuw_knop {
+  font-family: digitalFont;
+  font-size: 48px;
+  color: white;
+  position: absolute;
+  text-align: center;
+  background-color: #006837;
+  width: 200px;
+  height: 150px;
+  border-radius: 30px;
+  margin-top: 905px;
+  margin-left: 1190px;
+  opacity: 0%;
+  animation: opnieuwAnimation 2s forwards;
+  animation-delay: 5s;
+}
+
+#opnieuw_knop p {
+  margin-top: 50px;
+}
+
+#opnieuw_knop:hover {
+  color: #006837;
+  background-color: white;
+}
+
+/*ANIMATIE KEYFRAMES */
+/*SCENE 1*/
+@keyframes turnEarth {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes starAnimations {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+}
+
+/*SCENE 2*/
+@keyframes graphAnimation {
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -3186px;
+  }
+}
+
+@keyframes mouthAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1, 2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes baasHoofdAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1, 1) translate(0px, 10px);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wormHoofdAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1, 1) translate(0px, 10px) rotate(45deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/*SCENE 3*/
+@keyframes reloadAnimation {
+  0%,
+  35% {
+    background-position: 0px;
+  }
+  to {
+    background-position: -472px;
+  }
+}
+
+@keyframes shootAnimation {
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -473px;
+  }
+}
+
+@keyframes instructieUfoAnimation {
+  from {
+    background-position: 0px;
+    transform: translate(0px, 0px);
+  }
+  to {
+    background-position: -603px;
+    transform: translate(-9px, -80px);
+  } /*COMPENSATIE SPRITESHEET VERVORMING*/
+}
+
+@keyframes ammoIndicatorAnimation {
+  0%,
+  30% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -1428px;
+  }
+}
+
+@keyframes begrepenAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes slideInAnimation {
+  0%,
+  50% {
+    transform: translate(0px, -900px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes helpAnimation {
+  0%, 50% {
+    transform: scale(1);
+  }
+  25%, 75% {
+    transform: scale(1.1);
+  }
+}
+
+/*SCENE 4*/
+@keyframes ufoMoveAnimation {
+  0% {
+    transform: rotate(0deg);
+    transform: scale(1);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/*SCENE 5*/
+@keyframes tekstMoveDownAnimation {
+  0%,
+  100% {
+    transform: translateY(-230px);
+  }
+  13%,
+  75% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes tekstFlickerAnimation {
+  0% {
+    opacity: 0%;
+  }
+  50% {
+    opacity: 100%;
+  }
+}
+
+@keyframes ufoBaasAppear {
+  0%,
+  13%,
+  50% {
+    opacity: 0%;
+  }
+  25% {
+    opacity: 100%;
+    transform: rotate(-5deg);
+  }
+  75% {
+    opacity: 0%;
+    transform: rotate(5deg);
+  }
+  25%,
+  63%,
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes ufoBaasMovement {
+  0%,
+  50%,
+  100% {
+    transform: translate(0px, 0px);
+  }
+  13% {
+    transform: translate(-250px, -200px);
+  }
+  25% {
+    transform: translate(220px, -200px);
+  }
+  63% {
+    transform: translate(-250px, 200px);
+  }
+  75% {
+    transform: translate(220px, 200px);
+  }
+}
+
+@keyframes baasOntploffingAnimation {
+  from {
+    background-position: 0px;
+  }
+  to {
+    background-position: -5038px;
+  }
+}
+
+/*SCENE 6*/
+@keyframes wormHandMovement {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(-100px, -200px);
+  }
+  100% {
+    transform: translate(-20px, -475px);
+  }
+}
+
+@keyframes badgeAnimation {
+  0% {
+    transform: translate(-50px, -300px) scale(1.1);
+  }
+  15%,
+  75% {
+    transform: scale(5) translate(-10px, -80px);
+  }
+  100% {
+    transform: scale(1) translate(0px, 0px);
+  }
+}
+
+@keyframes vlagAnimation {
+  0%,
+  75% {
+    transform: translate(0px, -1000px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes opnieuwAnimation {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    opacity: 100%;
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    opacity: 100%;
+  }
+}
