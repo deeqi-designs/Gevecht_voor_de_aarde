@@ -1,3 +1,5 @@
+//GEMAAKT DOOR MIKA STERKEN
+
 function sceneChanger(sceneName) {
   //FUNCTIE OM VAN SCENE TE VERANDEREN, MAAKT DIVS EN ANDERE ELEMENTEN HETZELFDE ALS EEN <A HREF> ELEMENT
   if (sceneName == "scene_2.html") {

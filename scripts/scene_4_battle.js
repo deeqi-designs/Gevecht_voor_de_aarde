@@ -1,3 +1,4 @@
+//GEMAAKT DOOR MIKA STERKEN
 //VARIABELEN
 
 function sceneChanger(sceneName) {
